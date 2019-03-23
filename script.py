@@ -10,12 +10,25 @@ app.config['SECRET_KEY'] = "JajtuBhp25@nfoioet"
 # socketio = SocketIO(app)
 bcrypt = Bcrypt(app)
 
+<<<<<<< HEAD
+@app.route("/", methods=["GET"])
+def home():
+	try:
+		if not session['logged_in']:
+			return render_template("login.html")
+		else:
+			lwe = ["jlfsd","jlsdaf","jerwuuefbc"]
+			return render_template("home.html",username="sayan",topics=lwe)
+	except Exception:
+		return render_template("signup.html")
+=======
 
 @app.route("/")
 def home():
     lwe = ["Calculus", "Consonants", "Mechanics"]
     return render_template("home.html", username="sayan", topics=lwe)
 
+>>>>>>> bd75272251579b6d9e2e1dc2cdcacadf9448ae24
 
 @app.route("/register")
 def register():
@@ -51,6 +64,10 @@ def signup():
     else:
         return render_template("signup.html")
 
+
+@app.route("/quiz")
+def quiz():
+	return render_template("chat.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
