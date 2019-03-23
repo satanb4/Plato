@@ -7,9 +7,10 @@ class Database:
         global cur
         conn = sq.connect(r"user_data.db")
         cur = conn.cursor()
-        cur.executemany(
-            "CREATE TABLE IF NOT EXISTS users(id INTEGER PRIMARY KEY,fname TEXT,sname TEXT,birthday DATE,mail TEXT); \
-            CREATE TABLE IF NOT EXISTS academics(id INTEGER FOREIGN KEY(id) REFERENCES users(id),class INT,school TEXT,city TEXT)"
+        cur.executescript(
+            "CREATE TABLE IF NOT EXISTS users(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,fname TEXT,sname TEXT,birthday DATE,mail TEXT); \
+            CREATE TABLE IF NOT EXISTS academics(aid INTEGER,class INTEGER,school TEXT,city TEXT, PRIMARY KEY(aid),FOREIGN KEY(aid) REFERENCES users(id) ON DELETE CASCADE); \
+            CREATE TABLE IF NOT EXISTS achievements(uid INTEGER,points INTEGER, level INTEGER,PRIMARY KEY(uid),FOREIGN KEY(uid) REFERENCES users(id) ON DELETE CASCADE);"
         )
         """
         cur.execute(
@@ -52,6 +53,15 @@ class Database:
         conn.commit()
         if error != None:
             conn.rollback()
+    
+    def update_achievements(self,id,points,level):
+        error = None
+        cur.execute(
+            "UPDATE achievements SET points=?,level=? WHERE id=?",(points,level,id)
+        )
+        conn.commit()
+        if error != None:
+            conn.rollback()
 
     def view_users(self):
         cur.execute(
@@ -69,3 +79,5 @@ class Database:
     
     def __del__(self):
         conn.close()
+
+db = Database()
