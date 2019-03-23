@@ -10,12 +10,16 @@ app.config['SECRET_KEY'] = "JajtuBhp25@nfoioet"
 
 @app.route("/")
 def home():
-	return render_template('signup.html')
+        lwe = ["jlfsd","jlsdaf","jerwuuefbc"]
+        return render_template("home.html",username="sayan",topics=lwe)
+
+@app.route("/register")
+def register():
+        return render_template("signup.html")
 
 @app.route("/login")
 def signup():
         return render_template("login.html")
-
 
 if __name__ == "__main__":
     app.run(debug = True)

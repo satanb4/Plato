@@ -1,0 +1,67 @@
+{%extends 'layout.html'%}
+
+{%block body%}
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <!-- Brand -->
+    <a class="navbar-brand" href="#">Navbar</a>
+  
+    <!-- Toggler/collapsibe Button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+      </ul>
+    </div>
+  </nav> 
+<div class="container">
+  <div class="jumbotron">
+      <h1 class="display-2 text-center">Hey there {{username}}!</h1>
+      <p class="lead text-justify">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corrupti architecto corporis quis inventore dolores sint, dignissimos provident enim iusto magni necessitatibus rerum cupiditate, fugiat voluptate pariatur culpa adipisci, blanditiis cumque.</p>
+  </div>
+</div>
+
+<div class="container">
+  <div class="card-deck">
+          <div class="card-body text-center">
+            <div class="card bg-light">
+                <h1 class="display-5">Group Assignments</h1>
+                <hr>
+                {%for topic in topics%}
+                <div class="container">
+                  <p><button type="button" class="btn btn-lg btn-primary btn-block">{{topic}}</button></p>
+                </div>
+                {%endfor%}
+            </div>
+          </div>
+
+          <div class="card-body text-center">
+            <div class="card bg-light">
+                <h1 class="display-5">Study with Someone</h1>
+                <hr>
+                  <div class="dropdown">
+                    <button class="btn btn-lg btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Topic<span class="caret"></button>
+                      <ul class="dropdown-menu">
+                      {%for topic in topics%}
+                      <li><a class="dropdown-item" href="#">{{topic}}</a></li>
+                      {%endfor%}
+                  </ul>
+                  </div>
+                  <a class="btn btn-lg" href="/quiz">Start Working!</a>
+            </div>
+          </div>
+  </div>
+</div>
+
+{%endblock%}

@@ -61,9 +61,8 @@ body {
   line-height: 1.5;
   color: #212529;
   text-align: left;
-  background-image: url("/static/images/bg.jpg");
   background-size: cover;
-  background-color: #fd7e14;
+  background-color: #008d86;
 }
 
 [tabindex="-1"]:focus {
