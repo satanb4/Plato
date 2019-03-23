@@ -16,7 +16,7 @@
                     </div>
 
                     <div class="form-label-group">
-                        <input type="text" id="inputUserame" class="form-control" placeholder="sname" required autofocus>
+                        <input type="text" id="inputUserame" class="form-control" placeholder="sname" required>
                         <label for="inputUserame">Last Name</label>
                     </div>
       
@@ -33,12 +33,25 @@
                     </div>
                     
                     <div class="form-label-group">
-                      <input type="password" id="inputConfirmPassword" class="form-control" placeholder="Password" required>
+                      <input type="password" id="inputConfirmPassword" class="form-control" placeholder="Password" required >
                       <label for="inputConfirmPassword">Confirm password</label>
                     </div>
+
+                    
       
-                    <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Register</button>
+                    <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" onclick="return Validate()">Register</button>
                     <a class="d-block text-center mt-2 small" href="/login">Sign In</a>
+                    <script src="/static/js/bootstrap.min.js">
+                      function Validate() {
+                          var password = document.getElementById("inputPassword").value;
+                          var confirmPassword = document.getElementById("inputConfirmPassword").value;
+                          if (password != confirmPassword) {
+                              alert("Passwords do not match.");
+                              return false;
+                          }
+                          return true;
+                      }
+                  </script>
                     <hr class="my-4">
                     <!-- <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> Sign up with Google</button>
                     <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"><i class="fab fa-facebook-f mr-2"></i> Sign up with Facebook</button> -->
