@@ -53,16 +53,16 @@ class Database:
 
     def view_users(self,sid):
         self.cur.execute(
-            "SELECT fname,sname,mail,password FROM users WHERE sid=?",(sid)
+            "SELECT fname,sname,mail,password FROM users WHERE sid=?",(sid,)
         )
-        rows = self.cur.fetchall()[0]
+        rows = self.cur.fetchall()
         return rows
     
     def id_of_mail(self,mail=""):
         self.cur.execute(
             "SELECT sid FROM users WHERE mail=?",(mail,)
         )
-        rows = self.cur.fetchall()[0]
+        rows = self.cur.fetchall()
         return rows
     
     def view_academics(self,sid):
@@ -76,6 +76,4 @@ class Database:
         self.cur.execute(
             "DELETE FROM users WHERE sid=?",(sid)
         )
-
-    def __del__(self):
-        self.conn.close()
+        self.conn.commit()

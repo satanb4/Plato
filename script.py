@@ -13,7 +13,7 @@ bcrypt = Bcrypt(app)
 
 @app.route("/")
 def home():
-    lwe = ["jlfsd", "jlsdaf", "jerwuuefbc"]
+    lwe = ["Calculus", "Consonants", "Mechanics"]
     return render_template("home.html", username="sayan", topics=lwe)
 
 
@@ -27,11 +27,11 @@ def login():
     db = Database()
     if request.method == 'POST':
         dbmail = request.form.get('mail')
-        rows = db.login_check(dbmail)
-        print(rows)
-        if rows[3] == request.form.get('pass'):
+        ide = str(db.id_of_mail(dbmail))
+        passw = db.view_users(ide)
+        if passw == request.form.get('pass'):
             session['logged_in'] = True
-            return render_template("layout.html")
+            return redirect(url_for("home"))
         else:
             return render_template("login.html")
     else:
@@ -47,9 +47,9 @@ def signup():
         email = request.form.get('mail')
         pword = request.form.get('password')
         db.add_user(firstname, lastname, email, pword)
-        return render_template("home.html")
+        return redirect(url_for("home"))
     else:
-        return("signup.html")
+        return render_template("signup.html")
 
 
 if __name__ == "__main__":
