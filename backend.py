@@ -8,8 +8,7 @@ class Database:
         conn = sq.connect(r"user_data.db")
         cur = conn.cursor()
         cur.executescript(
-            "CREATE TABLE IF NOT EXISTS login(mail TEXT PRIMARY KEY NOT NULL,password )
-            CREATE TABLE IF NOT EXISTS users(sid INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,fname TEXT,sname TEXT,birthday DATE,mail TEXT); \
+            "CREATE TABLE IF NOT EXISTS users(sid INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,fname TEXT,sname TEXT,mail TEXT,password VARCHAR); \
             CREATE TABLE IF NOT EXISTS academics(aid INTEGER,class INTEGER,school TEXT,city TEXT, PRIMARY KEY(aid),FOREIGN KEY(aid) REFERENCES users(sid) ON DELETE CASCADE); \
             CREATE TABLE IF NOT EXISTS achievements(uid INTEGER,points INTEGER, level INTEGER,PRIMARY KEY(uid),FOREIGN KEY(uid) REFERENCES users(sid) ON DELETE CASCADE);"
         )
@@ -19,10 +18,10 @@ class Database:
         )"""
         conn.commit()
     
-    def add_user(self,fname,sname,birthday,mail):
+    def add_user(self,fname,sname,mail,password):
         error = None
         cur.execute(
-            "INSERT INTO TABLE users(NULL,?,?,?,?)",(fname,sname,birthday,mail)
+            "INSERT INTO TABLE users(NULL,?,?,?,?,?)",(fname,sname,mail,password)
         )
         conn.commit()
         if error != None:
@@ -37,10 +36,10 @@ class Database:
         if error != None:
             conn.rollback()
     
-    def update_users(self,sid,fname,sname,birthday):
+    def update_users(self,sid,fname,sname):
         error = None
         cur.execute(
-            "UPDATE academics SET fname=?,sname=?,birthday=? WHERE sid=?",(fname,sname,birthday,sid)
+            "UPDATE academics SET fname=?,sname=? WHERE sid=?",(fname,sname,sid)
         )
         conn.commit()
         if error != None:
@@ -64,9 +63,16 @@ class Database:
         if error != None:
             conn.rollback()
 
-    def view_users(self):
+    def view_users(self,sid):
         cur.execute(
-            "SELECT * FROM users WHERE sid=?",(sid)
+            "SELECT fname,sname,birthday,mail FROM users WHERE sid=?",(sid)
+        )
+        rows = cur.fetchall()
+        return rows
+    
+    def login_check(self,mail):
+        cur.execute(
+            "SELECT id FROM users WHERE mail=?",(mail)
         )
         rows = cur.fetchall()
         return rows
