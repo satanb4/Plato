@@ -10,7 +10,7 @@ class Database:
     def __init__(self):
         global conn
         global cur
-        conn = sq.connect(r"/static/user_data.db")
+        conn = sq.connect(r"user_data.db")
         cur = conn.cursor()
         cur.executescript(
             "CREATE TABLE IF NOT EXISTS users(sid INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,fname TEXT,sname TEXT,mail TEXT,password VARCHAR); \
@@ -27,7 +27,7 @@ class Database:
     def add_user(self,fname,sname,mail,password):
         error = None
         cur.execute(
-            "INSERT INTO TABLE users(NULL,?,?,?,?,?)",(fname,sname,mail,password)
+            "INSERT INTO users VALUES(NULL,?,?,?,?)",(fname,sname,mail,password)
         )
         conn.commit()
         if error != None:
@@ -36,7 +36,7 @@ class Database:
     def add_academics(self,classs,school,city):
         error = None
         cur.execute(
-            "INSERT INTO TABLE academics(NULL,?,?,?)",(classs,school,city)
+            "INSERT INTO academics VALUES(NULL,?,?,?)",(classs,school,city)
         )
         conn.commit()
         if error != None:
@@ -79,10 +79,10 @@ class Database:
     
     def login_check(self,mail):
         cur.execute(
-            "SELECT password FROM users WHERE mail=?",(mail)
+            "SELECT * FROM users WHERE mail=?",(mail)
         )
         rows = cur.fetchall()
-        return bcrypt.generate_password_hash(rows[1])
+        return rows
 
     
     def view_academics(self,sid):

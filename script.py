@@ -18,13 +18,15 @@ def home():
 def login():
 	db = Database()
 	if request.method == 'POST':
-		if bcrypt.check_password_hash(db.login_check(request.form['mail']), request.form['password']):
+		dbmail = request.form.get('mail')
+		rows = db.login_check(dbmail)
+		if rows[4] == request.form.get('password'):
 			session['logged_in']=True
-			return render_template("home.html")
+			return render_template("layout.html")
 		else:
-			return("login.html")
+			return render_template("login.html")
 	else:
-		return("login.html")
+		return render_template("login.html")
 
 @app.route("/signup", methods=["GET","POST"])
 def signup():
