@@ -88,5 +88,3 @@ class Database:
     
     def __del__(self):
         conn.close()
-
-db = Database()
