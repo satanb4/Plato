@@ -57,6 +57,7 @@ class Database:
     
     def update_achievements(self,sid,points,level):
         error = None
+        
         cur.execute(
             "UPDATE achievements SET points=?,level=? WHERE sid=?",(points,level,sid)
         )
