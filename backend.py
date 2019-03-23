@@ -1,4 +1,9 @@
+from flask import Flask 
 import sqlite3 as sq
+from flask_bcrypt import Bcrypt
+
+app = Flask(__name__)
+bcrypt = Bcrypt(app)
 
 class Database:
 
@@ -74,10 +79,11 @@ class Database:
     
     def login_check(self,mail):
         cur.execute(
-            "SELECT id FROM users WHERE mail=?",(mail)
+            "SELECT password FROM users WHERE mail=?",(mail)
         )
         rows = cur.fetchall()
-        return rows
+        return bcrypt.generate_password_hash(rows[1])
+
     
     def view_academics(self,sid):
         cur.execute(
