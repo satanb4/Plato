@@ -35,7 +35,7 @@ def signup():
 		email = request.form.get('mail')
 		pword = request.form.get('password')
 		db.add_user(firstname,lastname,email,pword)
-		return render_template("layout.html")
+		return render_template("home.html")
 	else:
 		return("signup.html")
 
