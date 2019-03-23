@@ -5,12 +5,13 @@ class Database:
     def __init__(self):
         global conn
         global cur
-        conn = sq.connect(r"user_data.db")
+        conn = sq.connect(r"/static/user_data.db")
         cur = conn.cursor()
         cur.executescript(
             "CREATE TABLE IF NOT EXISTS users(sid INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,fname TEXT,sname TEXT,mail TEXT,password VARCHAR); \
             CREATE TABLE IF NOT EXISTS academics(aid INTEGER,class INTEGER,school TEXT,city TEXT, PRIMARY KEY(aid),FOREIGN KEY(aid) REFERENCES users(sid) ON DELETE CASCADE); \
-            CREATE TABLE IF NOT EXISTS achievements(uid INTEGER,points INTEGER, level INTEGER,PRIMARY KEY(uid),FOREIGN KEY(uid) REFERENCES users(sid) ON DELETE CASCADE);"
+            CREATE TABLE IF NOT EXISTS achievements(uid INTEGER,points INTEGER, level INTEGER,PRIMARY KEY(uid),FOREIGN KEY(uid) REFERENCES users(sid) ON DELETE CASCADE);\
+            CREATE TABLE IF NOT EXISTS topics(tid INTEGER PRIMARY KEY, topic TEXT)"
         )
         """
         cur.execute(

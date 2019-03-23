@@ -44,6 +44,15 @@
         border-radius: 1.5rem;
         padding:2%;
     }
+    .btnSign{
+        font-weight: 600;
+        width: 50%;
+        color: #518433;
+        background-color: #fff;
+        border: none;
+        border-radius: 1.5rem;
+        padding:2%;
+    }
     .btnForgetPwd{
         color: #fff;
         font-weight: 600;
