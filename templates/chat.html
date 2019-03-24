@@ -19,6 +19,8 @@
         <li class="nav-item">
           <a class="nav-link" href="#">User</a>
         </li>
+        <li><a href="{{url_for('home')}}" class="btn btn-success">Go Back</a></li>
+        <br>
         <li><a href="/logout" class="btn btn-warning">Logout</a></li>
       </ul>
     </div>
@@ -29,22 +31,29 @@
         <div class="card col-xl-8 bg-light">
             <h3>Quiz</h3>
             <hr>
-            {%for question in quiz%}
             <div class="container">
             <div class="card">
                 <div class="card-body bg-primary">
+                  
+                  
+                  {%for question in quiz['questions']%}
+                  {%for answers in quiz['answers']%} 
                   <h4 class="card-title">Question</h4>
                   <p class="card-text">{{question}}</p>
-                  <a href="#" class="card-link">Card link</a>
-                  <a href="#" class="card-link">Another link</a>
+                  <a href="#" class="btn btn-success">{{answers[0]}}</a>
+                    <a href="#" class="btn btn-success">{{answers[1]}}</a>
+                    <a href="#" class="btn btn-success">{{answers[2]}}</a>
+                    <a href="#" class="btn btn-success">{{answers[3]}}</a>
+                  {%endfor%}              
+                {%endfor%}
+                  
                 </div>
               </div>
             </div>
-            {%endfor%}
+            
         </div>
         <div class="card col-xl-4 bg-light">
-            <div class="row " style="padding-top:40px;">
-                <h3 class="text-center">Realtime Chat Application with Flask, SocketIO</h3>
+            
                 <br/><br/>
          
                 <div class="col-md-12">
@@ -71,5 +80,4 @@
         </div>
     </div>
 </div>
-
 {%endblock%}

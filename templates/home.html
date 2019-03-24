@@ -48,6 +48,7 @@
             <div class="card bg-light">
                 <h1 class="display-5">Study with Someone</h1>
                 <hr>
+                <p>
                   <div class="dropdown">
                     <button class="btn btn-primary btn-lg dropdown-toggle" type="button" data-toggle="dropdown">Select Topic
                       <span class="caret">
@@ -58,8 +59,24 @@
                       {%endfor%}
                       </ul>
                   </div>
-                  <a class="btn btn-lg" href="/chat">Start Working!</a>
+                </p>
+                <div class="panel-body">
+                    <div class="login-panel panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Choose a nickname to Start Working</h3>
+                        </div>
+                    <form role="form" id="frm-login" action="/chat">
+                        <fieldset>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Enter Nickname" name="nickname" id="nickname" type="text" autofocus required="">
+                            </div>
+                            <button type="submit" class="btn btn-lg btn-success btn-block">Start Working!</button>
+                        </fieldset>
+                    </form>
+                </div>
+                  <!-- <a class="btn btn-lg" href="/chat">Start Working!</a> -->
             </div>
+            
           </div>
   </div>
 </div>

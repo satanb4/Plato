@@ -11,6 +11,21 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="/static/js/bootstrap.bundle.js"></script>
         <script src="/static/js/bootstrap.min.js"></script>
+        <script>
+                $(function(){
+                    if ($.cookie("realtime-chat-nickname")) {
+                        window.location = "/chat"
+                    } else {
+                        $("#frm-login").submit(function(event) {
+                            event.preventDefault();
+                            if ($("#nickname").val() !== '') {
+                                $.cookie("realtime-chat-nickname", $("#nickname").val());
+                                window.location = "/chat";
+                            }
+                        })
+                    }
+                })
+            </script>
 
         <script>
                 var channel = "/chat";
