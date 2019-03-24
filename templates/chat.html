@@ -2,35 +2,49 @@
 
 {%block body%}
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-        <!-- Brand -->
-        <a class="navbar-brand" href="#">Navbar</a>
-      
-        <!-- Toggler/collapsibe Button -->
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      
-        <!-- Navbar links -->
-        <div class="collapse navbar-collapse" id="collapsibleNavbar">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-          </ul>
-        </div>
-</nav>
+    <!-- Brand -->
+    <a class="navbar-brand" href="/">Plato</a>
+  
+    <!-- Toggler/collapsibe Button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="#">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">User</a>
+        </li>
+        <li><a href="/logout" class="btn btn-warning">Logout</a></li>
+      </ul>
+    </div>
+  </nav>
 
-<div class="container-fluid">
+<div class="container">
     <div class="row">
         <div class="card col-xl-8 bg-light">
             <h3>Quiz</h3>
             <hr>
+            {%for question in quiz%}
+            <div class="container">
+            <div class="card">
+                <div class="card-body bg-primary">
+                  <h4 class="card-title">Question</h4>
+                  <p class="card-text">{{question}}</p>
+                  <a href="#" class="card-link">Card link</a>
+                  <a href="#" class="card-link">Another link</a>
+                </div>
+              </div>
+            </div>
+            {%endfor%}
+        </div>
+        <div class="card col-xl-4 bg-light">
+          <h1>Chat!</h1>
+          <hr>
         </div>
     </div>
 </div>
