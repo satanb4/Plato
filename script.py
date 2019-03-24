@@ -1,15 +1,14 @@
 from flask import Flask, render_template, redirect, url_for, request, session
 from backend import Database
-import sqlite3
+#import sqlite3
 # from flask-socketio import SocketIO
 import random
-from flask_bcrypt import Bcrypt
+from flask_socketio import SocketIO,join_room,leave_room,emit
 
 
 app = Flask(__name__, static_url_path="/static")
 app.config['SECRET_KEY'] = "JajtuBhp25@nfoioet"
-# socketio = SocketIO(app)
-bcrypt = Bcrypt(app)
+socketio = SocketIO(app)
 
 
 @app.route("/", methods=["GET"])
@@ -73,11 +72,19 @@ def logout():
         session['logged_in'] = False
         return redirect(url_for("home"))
 
-@app.route("/quiz")
+@app.route("/chat")
 def quiz():
         total=["Lorem Ipsum","DOLOR","CATCH ME IF YOU CAN"]
         return render_template("chat.html",quiz = total)
 
-
-if __name__ == "__main__":
-    app.run(debug=True)
+@socketio.on('message', namespace='/chat')
+def chat_message(message):
+    emit('message', {'data': message['data']}, broadcast = True)
+ 
+@socketio.on('connect', namespace='/chat')
+def test_connect():
+    emit('my response', {'data': 'Connected', 'count': 0})
+ 
+ 
+if __name__ == '__main__':
+    socketio.run(app)
