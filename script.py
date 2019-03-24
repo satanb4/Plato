@@ -3,7 +3,7 @@ from backend import Database
 #import sqlite3
 # from flask-socketio import SocketIO
 import random
-from flask_socketio import SocketIO,join_room,leave_room,emit
+from flask_socketio import SocketIO, join_room, leave_room, emit
 
 
 app = Flask(__name__, static_url_path="/static")
@@ -18,7 +18,7 @@ def home():
             return redirect(url_for("signup"))
         else:
             lwe = ["Calculus", "English", "Statistics"]
-            return render_template("home.html", name="sayan", topics=lwe)
+            return render_template("home.html", uname=request.args.get('name'), topics=lwe)
     except Exception:
         return redirect(url_for("signup"))
 
@@ -41,7 +41,7 @@ def login():
 		user = db.view_users(dbmail)[0][1] 
 		if passw == request.form.get('pass'):
 			session['logged_in'] = True
-			return redirect(url_for("home"))
+			return redirect(url_for("home", name=user))
 		else:
 			return render_template("login.html")
 	else:
