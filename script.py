@@ -13,13 +13,13 @@ socketio = SocketIO(app)
 
 
 @app.route("/", methods=["GET","POST"])
-def home():
+def home():   
     try:
         if not session['logged_in']:
             return redirect(url_for("signup"))
         else:
             lwe = ["Calculus", "English", "Statistics"]
-            return render_template("home.html", username=request.args.get('name'), topics=lwe)
+            return render_template("home.html", username = request.args.get('name') , topics=lwe)
     except Exception:
         return redirect(url_for("signup"))
 
