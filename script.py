@@ -2,11 +2,17 @@ from flask import Flask, render_template, redirect, url_for, request, session
 from backend import Database
 #import sqlite3
 # from flask-socketio import SocketIO
+<<<<<<< HEAD
 import random
 from flask_socketio import SocketIO, join_room, leave_room, emit
+=======
+from flask_socketio import SocketIO,join_room,leave_room,emit
+from questions_api import print_top_level_collections as pr
+>>>>>>> 294e1a2ac0e28b2b150398ede0fb94a1f08a432d
 
 
 app = Flask(__name__, static_url_path="/static")
+app.debug = True
 app.config['SECRET_KEY'] = "JajtuBhp25@nfoioet"
 socketio = SocketIO(app)
 
@@ -74,7 +80,7 @@ def logout():
 
 @app.route("/chat")
 def quiz():
-        total=["Lorem Ipsum","DOLOR","CATCH ME IF YOU CAN"]
+        total = pr()
         return render_template("chat.html",quiz = total)
 
 @socketio.on('message', namespace='/chat')
