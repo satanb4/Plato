@@ -2,13 +2,8 @@ from flask import Flask, render_template, redirect, url_for, request, session
 from backend import Database
 #import sqlite3
 # from flask-socketio import SocketIO
-<<<<<<< HEAD
-import random
-from flask_socketio import SocketIO, join_room, leave_room, emit
-=======
 from flask_socketio import SocketIO,join_room,leave_room,emit
 from questions_api import print_top_level_collections as pr
->>>>>>> 294e1a2ac0e28b2b150398ede0fb94a1f08a432d
 
 
 app = Flask(__name__, static_url_path="/static")
@@ -17,14 +12,14 @@ app.config['SECRET_KEY'] = "JajtuBhp25@nfoioet"
 socketio = SocketIO(app)
 
 
-@app.route("/", methods=["GET"])
+@app.route("/", methods=["GET","POST"])
 def home():
     try:
         if not session['logged_in']:
             return redirect(url_for("signup"))
         else:
             lwe = ["Calculus", "English", "Statistics"]
-            return render_template("home.html", uname=request.args.get('name'), topics=lwe)
+            return render_template("home.html", username=request.args.get('name'), topics=lwe)
     except Exception:
         return redirect(url_for("signup"))
 
@@ -76,9 +71,9 @@ def signup():
 @app.route("/logout")
 def logout():
         session['logged_in'] = False
-        return redirect(url_for("home"))
+        return redirect(url_for("signup"))
 
-@app.route("/chat")
+@app.route("/chat", methods=["GET","POST"])
 def quiz():
         total = pr()
         return render_template("chat.html",quiz = total)
