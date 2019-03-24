@@ -1,4 +1,5 @@
 import requests
+import json
 
 base_url =" https://opentdb.com/api.php?amount=10&category=17&type=multiple"
 
@@ -19,5 +20,3 @@ def print_top_level_collections():
         a.append(temp+k)    
     d={'questions':q,'answers':a}
     return d
-
-print(print_top_level_collections())
